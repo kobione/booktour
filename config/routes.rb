@@ -1,4 +1,6 @@
 Booktour::Application.routes.draw do
+  resources :listings
+
   get "static_pages/about"
   get "static_pages/contact"
   # The priority is based upon order of creation: first created -> highest priority.
