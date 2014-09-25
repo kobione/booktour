@@ -1,4 +1,5 @@
 Booktour::Application.routes.draw do
+  devise_for :users
   resources :listings
 
   match '/about',   to: 'static_pages#about',   via: 'get'
