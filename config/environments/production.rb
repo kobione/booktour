@@ -80,5 +80,5 @@ Booktour::Application.configure do
 
   ## Required for Devise gem (we added per Devise instructions)
   ## REMEMBER to change localhost:3000 to actual application host
-  config.action_mailer.default_url_options = { :host => 'booktour-2014.herokuapp.com' }  
+  config.action_mailer.default_url_options = { :host => 'http://booktour-2014.herokuapp.com' }  
 end
