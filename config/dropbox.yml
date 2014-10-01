@@ -5,7 +5,6 @@ access_token_secret: "jirnup620fchoqq"
 user_id: "339264287"
 access_type: "app_folder"
 
-
 # app_key: "i55ok2oleogmh83"
 # app_secret: <%= ENV["APP_SECRET"] %>
 # access_token: "23lbxnghy3j7w7yn"
