@@ -13,7 +13,7 @@ gem "paperclip", "~> 4.2"
 gem "paperclip-dropbox", ">= 1.1.7"
 gem "figaro"
 gem 'devise'
-
+gem 'pry-byebug'
 
 group :development, :test do
     gem 'sqlite3', '1.3.8'
