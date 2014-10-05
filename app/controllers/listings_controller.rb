@@ -25,6 +25,7 @@ class ListingsController < ApplicationController
   # POST /listings.json
   def create
     @listing = Listing.new(listing_params)
+    @listing.user_id = current_user.id  #Devise gives us current_user method (including current_user.id). We create new parameter of @listing variable, @listing.user_id, which can now be saved
 
     respond_to do |format|
       if @listing.save
