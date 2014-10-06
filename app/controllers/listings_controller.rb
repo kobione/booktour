@@ -1,5 +1,9 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  #reroutes non-logged in user to sign_in page
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  #note, :check_same_user not doing :new or :create, b/c it is a given that is the current signed_in user.
+  before_action :check_same_user, only: [:edit, :update, :destroy]  
 
   # GET /listings
   # GET /listings.json
@@ -25,7 +29,9 @@ class ListingsController < ApplicationController
   # POST /listings.json
   def create
     @listing = Listing.new(listing_params)
-    @listing.user_id = current_user.id  #Devise gives us current_user method (including current_user.id). We create new parameter of @listing variable, @listing.user_id, which can now be saved
+    #Devise gives us current_user method (including current_user.id).
+    #We create new @listing.user_id, which can now be saved
+    @listing.user_id = current_user.id  
 
     respond_to do |format|
       if @listing.save
@@ -71,5 +77,12 @@ class ListingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
       params.require(:listing).permit(:name, :description, :price, :image)
+    end
+
+    # Created to identify if user has ability to alter a listing
+    def check_same_user
+      if current_user != @listing.user
+        redirect_to root_url, alert: "Cannot alter listing that belongs to another user."
+      end
     end
 end
