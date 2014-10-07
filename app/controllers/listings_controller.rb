@@ -1,9 +1,14 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   #reroutes non-logged in user to sign_in page
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:seller, :new, :create, :edit, :update, :destroy]
   #note, :check_same_user not doing :new or :create, b/c it is a given that is the current signed_in user.
-  before_action :check_same_user, only: [:edit, :update, :destroy]  
+  before_action :check_same_user, only: [:edit, :update, :destroy]
+
+  def seller
+    @listings = Listing.where(user: current_user)
+  end
+
 
   # GET /listings
   # GET /listings.json
