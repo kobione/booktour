@@ -1,9 +1,9 @@
 class Listing < ActiveRecord::Base
 	if Rails.env.development?
-		has_attached_file 	:image, :styles => { :medium => "200x", :thumb => "100x100>" }, :default_url => "image_not_found_:styles.png"
+		has_attached_file 	:image, :styles => { :medium => "200x", :thumb => "100x100" }, :default_url => "missing.png"
 		validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 	else
-		has_attached_file 	:image, :styles => { :medium => "200x", :thumb => "100x100>" }, :default_url => "image_not_found_:styles.png",
+		has_attached_file 	:image, :styles => { :medium => "200x", :thumb => "100x100" }, :default_url => "missing.png",
 							:storage => :dropbox,
 							:dropbox_credentials => Rails.root.join("config/dropbox.yml"),
 							:path => ":style/:id_:filename"
@@ -12,7 +12,7 @@ class Listing < ActiveRecord::Base
 
 	validates :name, :description, :price, presence: true
 	validates :price, numericality: { greater_than: 0 }
-	#validates_attachment_presence :image #if you want :image validation
+	validates_attachment_presence :image #if you want :image validation
 
 	belongs_to :user
 end
