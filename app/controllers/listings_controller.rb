@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
   before_action :check_same_user, only: [:edit, :update, :destroy]
 
   def seller
-    @listings = Listing.where(user: current_user)
+    @listings = Listing.where(user: current_user).order("created_at DESC")
   end
 
 
