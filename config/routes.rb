@@ -1,6 +1,10 @@
 Booktour::Application.routes.draw do
+  
   devise_for :users
-  resources :listings
+  
+  resources :listings do
+    resources :orders
+  end
 
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
