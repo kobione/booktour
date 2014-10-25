@@ -6,9 +6,11 @@ Booktour::Application.routes.draw do
     resources :orders
   end
 
-  match '/about',   to: 'static_pages#about',   via: 'get'
-  match '/contact', to: 'static_pages#contact', via: 'get'
-  match "/seller",  to: "listings#seller",      via: 'get'
+  match '/about',     to: 'static_pages#about',   via: 'get'
+  match '/contact',   to: 'static_pages#contact', via: 'get'
+  match '/seller',    to: 'listings#seller',      via: 'get'
+  match '/sales',     to: 'orders#sales',         via: 'get'
+  match '/purchases', to: 'orders#purchases',     via: 'get'
 
   root "listings#index"
   # The priority is based upon order of creation: first created -> highest priority.
