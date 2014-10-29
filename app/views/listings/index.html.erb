@@ -1,1 +1,18 @@
-test
+<div class="jumbotron">
+  <h1>BTour: Get Your Read On.</h1>
+</div>
+
+<div class="center">
+  <div class="row">
+    <% @listings.each do |listing| %>
+
+            <h3><%= listing.name %></h3>
+
+    <% end %>
+  </div>
+</div>
+
+<br>
+<% if user_signed_in? %>
+  <%= link_to 'New Listing', new_listing_path, class: "btn btn-link" %>
+<% end %>
