@@ -12,7 +12,7 @@ Booktour::Application.routes.draw do
   match '/sales',     to: 'orders#sales',         via: 'get'
   match '/purchases', to: 'orders#purchases',     via: 'get'
 
-  root :to => "listings#index"
+  root "listings#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
