@@ -34,9 +34,21 @@ class ListingsController < ApplicationController
   # POST /listings.json
   def create
     @listing = Listing.new(listing_params)
-    #Devise gives us current_user method (including current_user.id).
-    #We create new @listing.user_id, which can now be saved
-    @listing.user_id = current_user.id  
+    @listing.user_id = current_user.id
+
+    if current_user.recipient.blank?
+      Stripe.api_key = ENV["STRIPE_API_KEY"]
+      token = params[:stripeToken]
+
+      recipient = Stripe::Recipient.create(
+        :name => current_user.name,
+        :type => "individual",
+        :bank_account => token
+        )
+
+      current_user.recipient = recipient.id
+      current_user.save
+    end
 
     respond_to do |format|
       if @listing.save
